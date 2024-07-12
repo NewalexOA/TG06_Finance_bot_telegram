@@ -1,68 +1,33 @@
-### [Описание на русском языке](#русский)
+# Изменения и улучшения
 
-### [Description in English](#english)
+## Структура проекта
 
----
+Проект был рефакторирован для улучшения структуры и читабельности. Теперь он разделен на модули:
 
-## <a name="русский"></a>Описание на русском языке
-
-### Описание
-Этот проект представляет собой учебного Telegram-бота, предназначенного для демонстрации основных возможностей работы с API Telegram и Python. Бот предоставляет следующие функции:
-
-- Отправка приветственного сообщения пользователю при старте.
-- Регистрация пользователя с записью в базу данных.
-- Получение текущего курса валют.
-- Получение случайного финансового совета.
-- Запись расходов по 3 категориям.
-
-### Установка и настройка
-1. Клонируйте репозиторий:
-    ```bash
-    git clone https://github.com/NewalexOA/TG06_Finance_bot_telegram.git
-    ```
-2. Перейдите в директорию проекта:
-    ```bash
-    cd TG06_Finance_bot_telegram
-    ```
-3. Установите зависимости:
-    ```bash
-    pip install -r requirements.txt
-    ```
-4. Создайте файл `config.py` и добавьте в него ваши настройки (например, токен бота).
-
-### Запуск
-Запустите бота:
-```bash
-python bot.py
 ```
----
-## <a name="english"></a>Description in English
+project/
+│
+├── bot.py
+├── database.py
+├── handlers/
+│   ├── __init__.py
+│   ├── registration.py
+│   ├── exchange_rates.py
+│   ├── tips.py
+│   ├── finances.py
+└── config.py
+```
 
-### Description
-This project is an educational Telegram bot designed to demonstrate the basic capabilities of working with the Telegram API and Python. The bot provides the following functions:
+## Улучшения по сравнению с исходным кодом
 
-- Sending a welcome message to the user at the start.
-- Registering the user and recording to the database.
-- Getting the current exchange rate.
-- Getting a random financial tip.
-- Recording expenses in 3 categories.
+1. **Разделение функционала на модули**:
+   - Исходный код был представлен в одном файле. Теперь проект разделен на несколько модулей, что улучшает читабельность и облегчает сопровождение.
 
-### Installation and Setup
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/NewalexOA/TG06_Finance_bot_telegram.git
-    ```
-2. Navigate to the project directory:
-    ```bash
-    cd TG06_Finance_bot_telegram
-    ```
-3. Install dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
-4. Create a `config.py` file and add your settings (e.g., bot token).
+2. **Улучшенная обработка исключений**:
+   - В исходном коде использовался голый `except`, что противоречит рекомендациям PEP 8. Теперь используются конкретные исключения (`requests.RequestException`) для улучшения надежности кода.
 
-### Running the Bot
-Run the bot:
-```bash
-python bot.py
+3. **Инициализация и закрытие базы данных**:
+   - В исходном коде соединение с базой данных открывалось, но не закрывалось. Теперь добавлены функции для инициализации и закрытия соединения с базой данных.
+
+4. **Структурирование кода по функциям**:
+   - Обработчики инициализации, курсов валют, советов и финансовых данных вынесены в отдельные функции и модули, что улучшает структуру кода и его поддержку.
